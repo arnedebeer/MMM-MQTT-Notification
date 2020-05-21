@@ -1,4 +1,3 @@
-
 Module.register("MMM-MQTT-Notification", {
 
     // Default module config
@@ -19,7 +18,9 @@ Module.register("MMM-MQTT-Notification", {
         for (i = 0; i < this.config.mqttServers.length; i++) {
             var s = this.config.mqttServers[i];
             var serverKey = this.makeServerKey(s);
+
             console.log(this.name + ': Adding config for ' + s.address + ' port ' + s.port + ' user ' + s.user);
+
             for (j = 0; j < s.subscriptions.length; j++) {
                 var sub = s.subscriptions[j];
                 this.subscriptions.push({
@@ -44,7 +45,9 @@ Module.register("MMM-MQTT-Notification", {
                 for (i = 0; i < this.subscriptions.length; i++) {
                     sub = this.subscriptions[i];
                     if (sub.serverKey == payload.serverKey && sub.topic == payload.topic) {
-                        this.sendNotification(sub.notificationKey, payload.value);
+                        if(payload.value)
+                            this.sendNotification(sub.notificationKey, payload.value);
+                        else this.sendNotification(sub.notificationKey);
                     }
                 }
             } else {
@@ -52,6 +55,4 @@ Module.register("MMM-MQTT-Notification", {
             }
         }
     },
-
-
 });
