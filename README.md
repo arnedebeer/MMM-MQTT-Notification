@@ -3,8 +3,6 @@
 This Module sends Payload received on a MQTT Topic to a defined MM Notification
 
 
-
-
 ## Configuration
 
 Here is an example configuration with description. Put it in the `MagicMirror/config/config.js` file:
@@ -28,6 +26,5 @@ Here is an example configuration with description. Put it in the `MagicMirror/co
             ],
         }
     }
-
 
 mqttServers is an array, so you can add multiple servers to the same config.

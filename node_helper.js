@@ -19,12 +19,14 @@ module.exports = NodeHelper.create({
         var serverKey = this.makeServerKey(server);
         var mqttServer = {}
         var foundServer = false;
+        
         for (i = 0; i < servers.length; i++) {
             if (servers[i].serverKey === serverKey) {
                 mqttServer = servers[i];
                 foundServer = true;
             }
         }
+
         if(!foundServer) {
             mqttServer.serverKey = serverKey;
             mqttServer.address = server.address;
