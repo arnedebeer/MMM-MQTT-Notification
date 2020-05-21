@@ -45,9 +45,13 @@ Module.register("MMM-MQTT-Notification", {
                 for (i = 0; i < this.subscriptions.length; i++) {
                     sub = this.subscriptions[i];
                     if (sub.serverKey == payload.serverKey && sub.topic == payload.topic) {
-                        if(payload.value)
+                        if(payload.value != null){
                             this.sendNotification(sub.notificationKey, payload.value);
-                        else this.sendNotification(sub.notificationKey);
+                            console.log(this.name + ": payload value was not null, sending: " + sub.notificationKey + " - " + payload.value);
+                        } else {
+                            this.sendNotification(sub.notificationKey);
+                            console.log(this.name + ": payload value was NULL, sending: " + sub.notificationKey);
+                        }
                     }
                 }
             } else {
